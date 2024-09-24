@@ -1,13 +1,9 @@
 // routes/health.js
 const express = require('express');
 const router = express.Router();
-const { getHealthRecipes, viewHealthRecipes } = require('../controllers/healthy');
-
+const healthController = require('../controllers/health');
 
 // Route to get random vegetarian recipes
- router.get('/health', getHealthRecipes); // Route to fetch random recipes
- // Route to view the recipes
-router.get('/recipe',
-    viewHealthRecipes); // Route to render the recipe page
+router.get('/recipeInfo/:id', healthController.getHealthyDetails);
 
 module.exports = router;

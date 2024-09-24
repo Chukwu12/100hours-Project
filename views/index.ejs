@@ -12,28 +12,34 @@
 </head>
 <body>
     <nav>
-        <img src="/image/onice-high-resolution-logo-transparent (1).png" alt="logo-img">
+        <img src="/image/onice-logo.png" alt="logo-img">
         <ul>
             <li><a href="/">Home</a></li>
             <li><a href="/recipe">Recipes</a></li>
-            <li><a href="/contact">Contact</a></li>
+            <li><a href="/profile">Profile</a></li>
+            <li><a href="/create-recipes">Create Recipes</a></li>
         </ul>
     </nav>
 
 
-
+<!-- Login Form -->
 <section id="login-form">
     <div class="container">
         <div class="signin-signup">
-            <form action="" class="sign-in-form">
+            <form action="/login" class="sign-in-form" method="POST">
                 <h2 class="title">Sign in</h2>
-                <div class="input-field">
+                <% if (messages && messages.length > 0) { %>
+                    <% messages.forEach((msg) => { %>
+                      <div class="alert alert-danger"><%= msg.msg %></div>
+                    <% }) %>
+                  <% } %>
+                  <div class="input-field">
                     <i class="fa-solid fa-user"></i>
-                    <input type="text" placeholder="Username">
-                </div>
+                    <input type="text" name="email" placeholder="Email">
+                  </div>
                 <div class="input-field">
                     <i class="fa-solid fa-lock"></i>
-                    <input type="password" placeholder="Password">
+                    <input type="password" name="password"  id="exampleInputPassword1" placeholder="Password">
                 </div>
                 <input type="submit" value="Login" class="btn">
                 <p class="social-text">Or Sign in with social platform</p>
@@ -53,19 +59,26 @@
                 </div>
                 <p class="account-text">Don't have an account? <a href="#" id="sign-up-btn2">Sign up</a></p>
             </form>
-            <form action="" class="sign-up-form">
+
+      <!-- Signup Form -->
+            <form action="/signup" class="sign-up-form" method="POST">
                 <h2 class="title">Sign up</h2>
+                <% if (messages && messages.length > 0) { %>
+                    <% messages.forEach((msg) => { %>
+                      <div class="alert alert-danger"><%= msg.msg %></div>
+                    <% }) %>
+                  <% } %>
                 <div class="input-field">
                     <i class="fa-solid fa-user"></i>
-                    <input type="text" placeholder="Username">
+                    <input type="text"  name="userName" placeholder="Username">
                 </div>
                 <div class="input-field">
                     <i class="fa-solid fa-envelope"></i>
-                    <input type="text" placeholder="Email">
+                    <input type="email"  name="email" aria-describedby="emailHelp" placeholder="Email">
                 </div>
                 <div class="input-field">
                     <i class="fa-solid fa-lock"></i>
-                    <input type="password" placeholder="Password">
+                    <input type="password" name="password" placeholder="Password">
                 </div>
                 <input type="submit" value="Sign up" class="btn">
                 <p class="social-text">Or Sign in with social platform</p>
@@ -94,7 +107,7 @@
                         Let's embark on a flavorful journey together and make every meal a delightful experience!</p>
                     <button class="btn" id="sign-in-btn">Sign in</button>
                 </div>
-                <img src="/image/undraw_empty_cart_co35.svg" alt="" class="image">
+                <img src="/image/sign-in-logo.svg" alt="" class="image">
             </div>
             <div class="panel right-panel">
                 <div class="content">
@@ -102,13 +115,23 @@
                     <p>Welcome back! Please log in to access your saved recipes, personalized meal plans, and continue your culinary adventure with our Recipe App.</p>
                     <button class="btn" id="sign-up-btn">Sign up</button>
                 </div>
-                <img src="/image/undraw_sign_up_n6im.svg" alt="" class="image">
+                <img src="/image/sign-up-logo.svg" alt="" class="image">
             </div>
         </div>
     </div>
 </section>
 
-    <a href="/todos"> New Todo List</a>
+<% if (locals.messages.errors) { %> <% messages.errors.forEach( el => { %>
+    <div class="alert alert-danger"><%= el.msg %></div>
+    <% }) %> <% } %> <% if (locals.messages.info) { %> <%
+    messages.info.forEach( el => { %>
+    <div class="alert alert-info"><%= el.msg %></div>
+    <% }) %> <% } %>
+
+    <% if (messages.error) { %>
+        <div class="alert alert-danger"><%= messages.error %></div>
+      <% } %>
+    
     <script src='js/main.js'></script>
 </body>
 </html>
